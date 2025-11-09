@@ -1,4 +1,2 @@
 package com.example.navigasi
 
-class MainActivity {
-}
