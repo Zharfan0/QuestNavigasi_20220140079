@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.Button
 import androidx.compose.material3.DividerDefaults.Thickness
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -80,12 +81,16 @@ fun FormIsian(
             Row{
                 jenisK.forEach {
                         item->
-                    Row(verticalAlignment = Alignment.CenterVertically){
+                    Row(modifier = Modifier.selectable(
+                        selected = textJK == item,
+                        onClick = {textJK = item}
+                    ), verticalAlignment = Alignment.CenterVertically){
                         RadioButton(
-                            selected = false,
-                            onClick = {item}
-                        )
-                        Text(text = item)
+                            selected = textJK == item,
+                            onClick = {
+                                textJK = item
+                            })
+                        Text(item)
                     }
                 }
             }
@@ -96,12 +101,14 @@ fun FormIsian(
                 color = Color.Red
             )
             OutlinedTextField(
-                value = "",
+                value = textAlamat,
                 singleLine = true,
                 modifier = Modifier
                     .width(250.dp),
                 label = {Text(text = "Alamat")},
-                onValueChange = {},
+                onValueChange = {
+                    textAlamat = it
+                },
             )
             Spacer(modifier = Modifier.height(30.dp))
             Button(
